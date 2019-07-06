@@ -6,6 +6,8 @@ import Profile from './views/User/Profile.vue'
 import Settings from './views/User/Settings.vue'
 import Register from './views/User/Register.vue'
 import Login from './views/User/Login.vue'
+import Article from './views/Article/Article.vue'
+import CreateEdit from './views/Article/CreateEdit.vue'
 
 
 Vue.use(Router)
@@ -35,6 +37,16 @@ export default new Router({
         {
           path: 'register',
           component: Register
+        }
+      ]
+    },
+    {
+      path: '/article',
+      component: Article,
+      children: [
+        {
+          path: 'edit',
+          component: CreateEdit
         }
       ]
     }
