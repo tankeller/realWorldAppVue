@@ -9,7 +9,7 @@
         <span class="date">January 20th</span>
       </div>
       <button class="btn btn-outline-primary btn-sm pull-xs-right">
-        <i class="ion-heart"></i> 29
+        <i class="ion-heart"></i> {{ article.favoritesCount }}
       </button>
     </div>
     <a href class="preview-link">
