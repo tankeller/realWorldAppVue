@@ -6,7 +6,7 @@
       </a>
       <div class="info">
         <a href class="author">{{ article.author.username }}</a>
-        <span class="date">January 20th</span>
+        <span class="date">{{ article.createdAt | formatDate}}</span>
       </div>
       <button class="btn btn-outline-primary btn-sm pull-xs-right">
         <i class="ion-heart"></i> {{ article.favoritesCount }}
