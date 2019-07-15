@@ -19,7 +19,6 @@
             axios.get('https://conduit.productionready.io/api/articles')
             .then(res => {
                 this.articles = res.data.articles;
-                console.log(this.articles)
             })
             .catch(error => console.log(error))
         },
