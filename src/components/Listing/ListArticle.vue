@@ -16,6 +16,11 @@
       <h1>{{ article.title }}</h1>
       <p>{{ article.description }}</p>
       <span>Read more...</span>
+      <ul class="tag-list">
+        <li :key="index" v-for="(tag, index) in article.tagList" class="tag-default tag-pill tag-outline ng-binding ng-scope">
+            {{ tag }}
+        </li>
+    </ul>
     </a>
   </div>
 </template>
