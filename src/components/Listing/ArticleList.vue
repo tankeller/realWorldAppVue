@@ -7,9 +7,7 @@
 
 <script>
     import axios from 'axios'
-
     import ListArticle from './ListArticle.vue'
-import { close } from 'fs';
 
     export default {
         data () {
@@ -21,6 +19,7 @@ import { close } from 'fs';
             axios.get('https://conduit.productionready.io/api/articles')
             .then(res => {
                 this.articles = res.data.articles;
+                console.log(this.articles)
             })
             .catch(error => console.log(error))
         },
