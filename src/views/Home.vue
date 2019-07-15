@@ -32,14 +32,9 @@
           <p>Popular Tags</p>
 
           <div class="tag-list">
-            <a href="" class="tag-pill tag-default">programming</a>
-            <a href="" class="tag-pill tag-default">javascript</a>
-            <a href="" class="tag-pill tag-default">emberjs</a>
-            <a href="" class="tag-pill tag-default">angularjs</a>
-            <a href="" class="tag-pill tag-default">react</a>
-            <a href="" class="tag-pill tag-default">mean</a>
-            <a href="" class="tag-pill tag-default">node</a>
-            <a href="" class="tag-pill tag-default">rails</a>
+            <a :key="index" v-for="(tag, index) in tags" href="" class="tag-pill tag-default">
+              {{ tag }}
+            </a>
           </div>
         </div>
       </div>
@@ -51,12 +46,26 @@
 </template>
 
 <script>
+  import axios from 'axios'
   import ArticleList from '../components/Listing/ArticleList.vue'
 
   export default {
     name: "home",
+    data() {
+      return {
+        tags: {}
+      }
+    },
     components: {
       AppArticleList: ArticleList
+    },
+    created () {
+      axios.get('https://conduit.productionready.io/api/tags')
+      .then(res => {
+        this.tags = res.data.tags;
+      }).catch((err) => {
+        console.log(err)
+      });
     }
   };
 </script>
