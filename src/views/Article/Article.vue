@@ -2,68 +2,26 @@
   <div class="article-page">
     <div class="banner">
       <div class="container">
-        <h1>How to build webapps that scale</h1>
-
-        <div class="article-meta">
-          <a href>
-            <img src="http://i.imgur.com/Qr71crq.jpg">
-          </a>
-          <div class="info">
-            <a href class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
-          </div>
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-            &nbsp;
-            Follow Eric Simons
-            <span class="counter">(10)</span>
-          </button>
-          &nbsp;&nbsp;
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart"></i>
-            &nbsp;
-            Favorite Post
-            <span class="counter">(29)</span>
-          </button>
-        </div>
+        <h1>{{ article.title }}</h1>
+        <app-article-meta v-if="!loading" :article="article"></app-article-meta>
       </div>
     </div>
 
     <div class="container page">
       <div class="row article-content">
         <div class="col-md-12">
-          <p>Web development technologies have evolved at an incredible clip over the past few years.</p>
-          <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-          <p>It's a great solution for learning how other frameworks work.</p>
+          <p>{{ article.body }}</p>
+
+          <ul class="tag-list">
+            <li class="tag-default tag-pill tag-outline"></li>
+          </ul>
         </div>
       </div>
 
       <hr>
 
       <div class="article-actions">
-        <div class="article-meta">
-          <a href="profile.html">
-            <img src="http://i.imgur.com/Qr71crq.jpg">
-          </a>
-          <div class="info">
-            <a href class="author">Eric Simons</a>
-            <span class="date">January 20th</span>
-          </div>
-
-          <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-            &nbsp;
-            Follow Eric Simons
-            <span class="counter">(10)</span>
-          </button>
-          &nbsp;
-          <button class="btn btn-sm btn-outline-primary">
-            <i class="ion-heart"></i>
-            &nbsp;
-            Favorite Post
-            <span class="counter">(29)</span>
-          </button>
-        </div>
+        <app-article-meta v-if="!loading" :article="article"></app-article-meta>
       </div>
 
       <div class="row">
@@ -118,3 +76,33 @@
     </div>
   </div>
 </template>
+
+
+<script>
+  import axios from 'axios';
+  import ArticleMeta from '@/components/article/articleMeta.vue';
+
+  export default {
+        data () {
+          return {
+            article: {},
+            loading: true
+          }
+        },
+        created () {
+          let slug = this.$route.params.slug;
+          if (slug.length >= 1) {
+            axios.get('https://conduit.productionready.io/api/articles/' + slug)
+            .then(res => {
+                this.article = res.data.article;
+                this.loading = false;
+                console.log(this.article);
+            })
+            .catch(error => console.log(error));
+          }
+        },
+        components: {
+          AppArticleMeta: ArticleMeta,
+        }
+  }
+</script>
