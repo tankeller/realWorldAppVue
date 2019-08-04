@@ -41,7 +41,8 @@ export default new Router({
       ]
     },
     {
-      path: '/article',
+      path: '/article/:slug',
+      name: 'article',
       component: Article,
       children: [
         {
