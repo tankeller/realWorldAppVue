@@ -12,13 +12,15 @@
         <div class="col-md-12">
           <p>{{ article.body }}</p>
 
-          <ul class="tag-list">
-            <li class="tag-default tag-pill tag-outline"></li>
+          <ul  class="tag-list">
+            <li :key="index" v-for="(tag, index) in article.tagList" class="tag-default tag-pill tag-outline">
+              {{ tag }}
+            </li>
           </ul>
         </div>
       </div>
 
-      <hr />
+      <hr>
 
       <div class="article-actions">
         <app-article-meta v-if="!loading" :article="article"></app-article-meta>
@@ -26,15 +28,8 @@
 
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
-          <form class="card comment-form">
-            <div class="card-block">
-              <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
-            </div>
-            <div class="card-footer">
-              <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
-              <button class="btn btn-sm btn-primary">Post Comment</button>
-            </div>
-          </form>
+      
+            <app-create-comment-form></app-create-comment-form>
 
           <div class="card">
             <div class="card-block">
@@ -44,7 +39,7 @@
             </div>
             <div class="card-footer">
               <a href class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
+                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
               </a>
               &nbsp;
               <a href class="comment-author">Jacob Schmidt</a>
@@ -60,7 +55,7 @@
             </div>
             <div class="card-footer">
               <a href class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
+                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
               </a>
               &nbsp;
               <a href class="comment-author">Jacob Schmidt</a>
@@ -79,31 +74,32 @@
 
 
 <script>
-import axios from "axios";
-import ArticleMeta from "@/components/article/articleMeta.vue";
+  import axios from 'axios';
+  import AppArticleMeta from '@/components/article/articleMeta.vue';
+  import AppCreateCommentForm from '@/components/article/createCommentForm.vue'
 
-export default {
-  data() {
-    return {
-      article: {},
-      loading: true
-    };
-  },
-  created() {
-    let slug = this.$route.params.slug;
-    if (slug.length >= 1) {
-      axios
-        .get("https://conduit.productionready.io/api/articles/" + slug)
-        .then(res => {
-          this.article = res.data.article;
-          this.loading = false;
-          console.log(this.article);
-        })
-        .catch(error => console.log(error));
-    }
-  },
-  components: {
-    AppArticleMeta: ArticleMeta
+  export default {
+        data () {
+          return {
+            article: {},
+            loading: true
+          }
+        },
+        created () {
+          let slug = this.$route.params.slug;
+          if (slug.length >= 1) {
+            axios.get('https://conduit.productionready.io/api/articles/' + slug)
+            .then(res => {
+                this.article = res.data.article;
+                this.loading = false;
+                console.log(this.article);
+            })
+            .catch(error => console.log(error));
+          }
+        },
+        components: {
+          AppArticleMeta,
+          AppCreateCommentForm
+        }
   }
-};
 </script>
