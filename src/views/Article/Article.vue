@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <hr>
+      <hr />
 
       <div class="article-actions">
         <app-article-meta v-if="!loading" :article="article"></app-article-meta>
@@ -31,7 +31,7 @@
               <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
             </div>
             <div class="card-footer">
-              <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
+              <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
               <button class="btn btn-sm btn-primary">Post Comment</button>
             </div>
           </form>
@@ -44,7 +44,7 @@
             </div>
             <div class="card-footer">
               <a href class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
+                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
               </a>
               &nbsp;
               <a href class="comment-author">Jacob Schmidt</a>
@@ -60,7 +60,7 @@
             </div>
             <div class="card-footer">
               <a href class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
+                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
               </a>
               &nbsp;
               <a href class="comment-author">Jacob Schmidt</a>
@@ -79,30 +79,31 @@
 
 
 <script>
-  import axios from 'axios';
-  import ArticleMeta from '@/components/article/articleMeta.vue';
+import axios from "axios";
+import ArticleMeta from "@/components/article/articleMeta.vue";
 
-  export default {
-        data () {
-          return {
-            article: {},
-            loading: true
-          }
-        },
-        created () {
-          let slug = this.$route.params.slug;
-          if (slug.length >= 1) {
-            axios.get('https://conduit.productionready.io/api/articles/' + slug)
-            .then(res => {
-                this.article = res.data.article;
-                this.loading = false;
-                console.log(this.article);
-            })
-            .catch(error => console.log(error));
-          }
-        },
-        components: {
-          AppArticleMeta: ArticleMeta,
-        }
+export default {
+  data() {
+    return {
+      article: {},
+      loading: true
+    };
+  },
+  created() {
+    let slug = this.$route.params.slug;
+    if (slug.length >= 1) {
+      axios
+        .get("https://conduit.productionready.io/api/articles/" + slug)
+        .then(res => {
+          this.article = res.data.article;
+          this.loading = false;
+          console.log(this.article);
+        })
+        .catch(error => console.log(error));
+    }
+  },
+  components: {
+    AppArticleMeta: ArticleMeta
   }
+};
 </script>
