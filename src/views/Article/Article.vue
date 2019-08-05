@@ -29,43 +29,9 @@
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
       
-            <app-create-comment-form></app-create-comment-form>
-
-          <div class="card">
-            <div class="card-block">
-              <p
-                class="card-text"
-              >With supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-              <a href class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
-              </a>
-              &nbsp;
-              <a href class="comment-author">Jacob Schmidt</a>
-              <span class="date-posted">Dec 29th</span>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-block">
-              <p
-                class="card-text"
-              >With supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-              <a href class="comment-author">
-                <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
-              </a>
-              &nbsp;
-              <a href class="comment-author">Jacob Schmidt</a>
-              <span class="date-posted">Dec 29th</span>
-              <span class="mod-options">
-                <i class="ion-edit"></i>
-                <i class="ion-trash-a"></i>
-              </span>
-            </div>
-          </div>
+          <app-create-comment-form></app-create-comment-form>
+          <app-comment-card-list :slug="this.$route.params.slug"></app-comment-card-list>
+          
         </div>
       </div>
     </div>
@@ -76,7 +42,8 @@
 <script>
   import axios from 'axios';
   import AppArticleMeta from '@/components/article/articleMeta.vue';
-  import AppCreateCommentForm from '@/components/article/createCommentForm.vue'
+  import AppCreateCommentForm from '@/components/article/createCommentForm.vue';
+  import AppCommentCardList from '@/components/article/commentCardList.vue';
 
   export default {
         data () {
@@ -87,19 +54,18 @@
         },
         created () {
           let slug = this.$route.params.slug;
-          if (slug.length >= 1) {
-            axios.get('https://conduit.productionready.io/api/articles/' + slug)
-            .then(res => {
-                this.article = res.data.article;
-                this.loading = false;
-                console.log(this.article);
-            })
-            .catch(error => console.log(error));
-          }
+          axios.get('https://conduit.productionready.io/api/articles/' + slug)
+          .then(res => {
+              this.article = res.data.article;
+              this.loading = false;
+              console.log(this.article);
+          })
+          .catch(error => console.log(error));
         },
         components: {
           AppArticleMeta,
-          AppCreateCommentForm
+          AppCreateCommentForm,
+          AppCommentCardList
         }
   }
 </script>
