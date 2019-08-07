@@ -22,7 +22,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/user',
+      path: '/user/:username',
       name: 'profile',
       component: Profile,
       children: [
