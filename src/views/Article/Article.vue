@@ -58,7 +58,6 @@
           .then(res => {
               this.article = res.data.article;
               this.loading = false;
-              console.log(this.article);
           })
           .catch(error => console.log(error));
         },
