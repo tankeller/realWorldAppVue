@@ -1,9 +1,9 @@
 <template>
   <div class="article-preview">
     <div class="article-meta">
-      <a href="profile.html">
+      <router-link :to="{ name: 'profile', params: { username: article.author.username }}">
         <img v-if="article.author.image" :src="article.author.image" />
-      </a>
+      </router-link>
       <div class="info">
         <a href class="author">{{ article.author.username }}</a>
         <span class="date">{{ article.createdAt | formatDate}}</span>
