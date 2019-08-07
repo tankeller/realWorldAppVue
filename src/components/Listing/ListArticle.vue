@@ -13,7 +13,7 @@
         {{ article.favoritesCount }}
       </button>
     </div>
-    <a href class="preview-link">
+    <router-link class="preview-link" :to="{ name: 'article', params: { slug: article.slug }}">
       <h1>{{ article.title }}</h1>
       <p>{{ article.description }}</p>
       <span>Read more...</span>
@@ -24,7 +24,7 @@
           class="tag-default tag-pill tag-outline ng-binding ng-scope"
         >{{ tag }}</li>
       </ul>
-    </a>
+    </router-link>
   </div>
 </template>
 
