@@ -5,9 +5,9 @@
                 <p class="card-text">{{ comment.body }}.</p>
             </div>
             <div class="card-footer">
-                <a href v-if="comment.author.image" class="comment-author">
-                    <img :src="comment.author.image" class="comment-author-img" />
-                </a>
+                <router-link :to="{ name: 'profile', params: { username: comment.author.username }}" v-if="comment.author.image" class="comment-author">
+                    <img :src="comment.author.image" class="comment-author-img user-img" />
+                </router-link>
                 &nbsp;
                 <a href class="comment-author">{{ comment.author.username }}</a>
                 <span class="date-posted">{{ comment.createdAt | formatDate}}</span>
