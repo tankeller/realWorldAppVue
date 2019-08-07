@@ -9,7 +9,7 @@
                     <img :src="comment.author.image" class="comment-author-img user-img" />
                 </router-link>
                 &nbsp;
-                <a href class="comment-author">{{ comment.author.username }}</a>
+                <router-link :to="{ name: 'profile', params: { username: comment.author.username }}" class="comment-author">{{ comment.author.username }}</router-link>
                 <span class="date-posted">{{ comment.createdAt | formatDate}}</span>
                 <span class="mod-options">
                     <i class="ion-edit"></i>
