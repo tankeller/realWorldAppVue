@@ -15,12 +15,25 @@
                 articles: {}
             }
         },
+        props: ['author', 'showFavoritedArticles'],
         created () {
-            axios.get('https://conduit.productionready.io/api/articles')
-            .then(res => {
-                this.articles = res.data.articles;
-            })
-            .catch(error => console.log(error))
+            if (this.author) {
+                let urlParam = 'author'
+                if (this.showFavoritedArticles) {
+                    urlParam = 'favorited';
+                }
+                axios.get('https://conduit.productionready.io/api/articles?' + urlParam + '=' + this.author)
+                .then(res => {
+                    this.articles = res.data.articles;
+                })
+                .catch(error => console.log(error))
+            } else {
+                axios.get('https://conduit.productionready.io/api/articles')
+                .then(res => {
+                    this.articles = res.data.articles;
+                })
+                .catch(error => console.log(error))
+            }
         },
         components: {
             AppListArticle: ListArticle
