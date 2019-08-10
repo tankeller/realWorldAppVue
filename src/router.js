@@ -8,7 +8,7 @@ import Register from './views/User/Register.vue'
 import Login from './views/User/Login.vue'
 import Article from './views/Article/Article.vue'
 import CreateEdit from './views/Article/CreateEdit.vue'
-
+import store from './store.js'
 
 Vue.use(Router)
 
@@ -28,7 +28,14 @@ export default new Router({
       children: [
         {
           path: 'settings',
-          component: Settings
+          component: Settings,
+          beforeEnter (to, from, next) {
+            if (store.token != null) {
+              next()
+            } else {
+              next('/login')
+            }
+          }
         }
       ]
     },
