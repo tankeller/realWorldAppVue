@@ -29,16 +29,18 @@ export default new Router({
         {
           path: 'settings',
           component: Settings
-        },
-        {
-          path: 'login',
-          component: Login
-        },
-        {
-          path: 'register',
-          component: Register
         }
       ]
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/article/:slug',
