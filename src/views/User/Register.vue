@@ -31,35 +31,26 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
-  data() {
+  data () {
     return {
       formData: {
-        username: "",
-        email: "",
-        password: ""
-    }
+        username: '',
+        email: '',
+        password: ''
+      }
     }
   },
   methods: {
-    onSubmit() {
+    onSubmit () {
       const user = {
-        "user": {
-          "username": this.formData.name,
-          "email": this.formData.email,
-          "password": this.formData.password
+        user: {
+          username: this.formData.name,
+          email: this.formData.email,
+          password: this.formData.password
         }
       }
-      console.log(user);
-      axios.post('https://conduit.productionready.io/api/users', user)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+      this.$store.dispatch('signup', user);
     }
   }
 }
