@@ -7,22 +7,40 @@
             <!-- Add "active" class when you're on that page" -->
             <a class="nav-link active" href="">Home</a>
           </li>
-          <!-- Only show if signes in -->
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-compose"></i>&nbsp;New Post
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-gear-a"></i>&nbsp;Settings
-            </a>
-          </li>
-          -->
-          <li class="nav-item">
-            <router-link class="nav-link" :to="{name : 'register'}" >Sign up</router-link>
-          </li>
+
+          <template v-if="!auth">
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{name : 'login'}" >Sign in</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" :to="{name : 'register'}" >Sign up</router-link>
+            </li>
+          </template>
+
+          <template v-else>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="ion-compose"></i>&nbsp;New Post
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">
+                <i class="ion-gear-a"></i>&nbsp;Settings
+              </a>
+            </li>
+          </template>
+
         </ul>
       </div>
     </nav>
 </template>
+
+<script>
+export default {
+  computed: {
+    auth () {
+      return this.$store.getters.isAuthenticated
+    }
+  }
+}
+</script>

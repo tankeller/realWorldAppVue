@@ -40,5 +40,10 @@ export default new Vuex.Store({
           console.log(err);
         })
     }
+  },
+  getters: {
+    isAuthenticated (state) {
+      return state.idToken !== null
+    }
   }
 })
