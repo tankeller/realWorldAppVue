@@ -28,6 +28,11 @@
                 <i class="ion-gear-a"></i>&nbsp;Settings
               </a>
             </li>
+             <li class="nav-item">
+              <a class="nav-link" href="">
+                {{ user.username }}
+              </a>
+            </li>
           </template>
 
         </ul>
@@ -40,6 +45,9 @@ export default {
   computed: {
     auth () {
       return this.$store.getters.isAuthenticated
+    },
+    user () {
+      return this.$store.getters.getUser
     }
   }
 }

@@ -7,22 +7,19 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     idToken: null,
-    userID: null
+    user: null
   },
   mutations: {
     authUser (state, userData) {
       state.idToken = userData.token;
-      state.userID = userData.id;
+      state.user = userData;
     }
   },
   actions: {
     signup ({ commit }, authData) {
       axios.post('https://conduit.productionready.io/api/users', authData)
         .then(res => {
-          commit('authUser', {
-            token: res.data.user.token,
-            id: res.data.user.id
-          });
+          commit('authUser', res.data.user);
         })
         .catch(err => {
           console.log(err);
@@ -31,10 +28,7 @@ export default new Vuex.Store({
     login ({ commit }, authData) {
       axios.post('https://conduit.productionready.io/api/users/login', authData)
         .then(res => {
-          commit('authUser', {
-            token: res.data.user.token,
-            id: res.data.user.id
-          });
+          commit('authUser', res.data.user);
         })
         .catch(err => {
           console.log(err);
@@ -42,7 +36,6 @@ export default new Vuex.Store({
     },
     createArticle ({ commit }, articleData) {
       if (!this.state.idToken) {
-        console.log('not allowed');
         return
       }
       axios.defaults.headers.common['Authorization'] = `Token ${this.state.idToken}`;
@@ -58,6 +51,9 @@ export default new Vuex.Store({
   getters: {
     isAuthenticated (state) {
       return state.idToken !== null
+    },
+    getUser (state) {
+      return state.user;
     }
   }
 })
