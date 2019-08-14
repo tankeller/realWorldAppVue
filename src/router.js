@@ -52,10 +52,16 @@ export default new Router({
     {
       path: '/article/:slug',
       name: 'article',
-      component: Article,
+      component: Article
+    },
+    {
+      path: '/create',
+      name: 'create',
+      component: CreateEdit,
       children: [
         {
-          path: 'edit',
+          path: ':slug',
+          name: 'edit',
           component: CreateEdit
         }
       ]
