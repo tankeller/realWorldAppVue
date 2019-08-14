@@ -39,6 +39,20 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err);
         })
+    },
+    createArticle ({ commit }, articleData) {
+      if (!this.state.idToken) {
+        console.log('not allowed');
+        return
+      }
+      axios.defaults.headers.common['Authorization'] = `Token ${this.state.idToken}`;
+      axios.post('https://conduit.productionready.io/api/articles', articleData)
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        })
     }
   },
   getters: {
