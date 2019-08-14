@@ -19,9 +19,9 @@
 
           <template v-else>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <router-link :to="{ name: 'create' }" class="nav-link">
                 <i class="ion-compose"></i>&nbsp;New Post
-              </a>
+              </router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="">
