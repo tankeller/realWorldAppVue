@@ -29,9 +29,9 @@
               </a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="">
+              <router-link :to="{ name: 'profile', params: {username: user.username}}" class="nav-link">
                 {{ user.username }}
-              </a>
+              </router-link>
             </li>
           </template>
 

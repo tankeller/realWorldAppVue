@@ -47,7 +47,13 @@ export default {
           password: this.formData.password
         }
       }
-      this.$store.dispatch('login', user);
+      // this.$store.dispatch('login', user).then(() => { this.$router.push(`/user/${this.userData.username}` || '/') })
+      this.$store.dispatch('login', user).then(() => { console.log('success') })
+    }
+  },
+  computed: {
+    userData () {
+      return this.$store.getters.getUser
     }
   }
 }

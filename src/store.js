@@ -26,13 +26,16 @@ export default new Vuex.Store({
         })
     },
     login ({ commit }, authData) {
-      axios.post('https://conduit.productionready.io/api/users/login', authData)
-        .then(res => {
-          commit('authUser', res.data.user);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+      return new Promise((resolve, reject) => {
+        axios.post('https://conduit.productionready.io/api/users/login', authData)
+          .then(res => {
+            commit('authUser', res.data.user);
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        resolve();
+      })
     },
     createArticle ({ commit }, articleData) {
       if (!this.state.idToken) {
